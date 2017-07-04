@@ -13,5 +13,5 @@ All fields must have a "characterCount" class. It can be a input, textarea...
 You must declare a maxLength, otherwise the value will be undefined
 The TEXT FIELD ID and the SPAN CLASS must be the same.
 e.g.: 
-<input type='text' id='**name**'>
-<span class='**name**'>
+> <input type='text' id='**name**'>
+> <span class='**name**'>
