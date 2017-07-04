@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>charcount.js</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: "Open sans", arial, sans-serif;
+		}
+
+		form {
+			margin-left: 30px;
+			margin-top: 30px;
+			width: 500px;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+		}
+
+		input {
+			border: 1px solid #a2b7c1;
+			height: 30px;
+			width: 500px;
+			padding: 4px;
+		}
+
+		span {
+			font-size: 12px;
+			color: #a2b7c1;
+			display: block;
+			margin-bottom: 20px;
+		}
+
+		p {
+			font-size: 12px;
+			color: #aaa;
+			width: 500px;
+			margin-top: 0px;
+			margin-left: 20px;
+			margin-bottom: 5px;
+		}
+
+	</style>
+</head>
+<body>
+
+	<form>
+		<input class="characterCount" type="text" maxlength="10" id="name" placeholder="Video Workshop: Learning more about HTML, CSS and JavaScript with CodePen"/><span class="name"></span>
+		<input class="characterCount" type="text" maxlength="30" id="other" placeholder="Here you can put 30 characters"/><span class="other"></span>
+	</form>
+	<p><b>How it works:</b></p>
+	<p>The jQuery finds everything with a "characterCount" class inside a form and get each ID and maxLength;</p>
+	<p>It inserts the value of the maxLength inside the span tag;</p>
+	<p>Onkeyup it counts the value of the input and subtracts from the maxlength</p><br/>
+	<p><b>Notes:</b></p>
+	<p>All fields must have a "characterCount" class. It can be a input, textarea...</p>
+	<p>You must declare a maxLength, otherwise the value will be <b>undefined</b></p>
+	<p>The   <b>TEXT FIELD ID </b>and the <b>SPAN CLASS </b>must be the same.</p>
+	<p>e.g.: <br/>&#60;input type='text' <b>id='name'</b>></p>
+	<p>&#60;span <b>class='name'</b>></p>
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var n = $(".characterCount").length;
+			var IDs = [];
+			$("form").find(".characterCount").each(function(){ IDs.push(this.id); });
+			var n = n-1;
+			while (n >= 0 ) {
+				textLengthforAll(IDs[n]);
+				n--;
+			}
+		});
+		function textLengthforAll(initial_id){
+			var text_max = document.getElementById(initial_id).maxLength;
+			$('.' + initial_id).html(text_max + ' characters left');
+			$('#' + initial_id).keyup(function() {
+				var text_max = $(this).attr('maxLength');
+				var text_length = $(this).val().length;
+				var text_remaining = text_max - text_length;
+				if (text_remaining == 0) {
+					$('.' + initial_id).css("color","#f00");
+					$('.' + initial_id).html('Character limit reached');
+					$(this).css("border-color","#f00");
+				} else if (text_remaining == 1){
+					$('.' + initial_id).css("color","#a2b7c1");
+					$(this).css("border-color","#a2b7c1");
+					$('.' + initial_id).html(text_remaining + ' character left');
+				} else {
+					$('.' + initial_id).css("color","#a2b7c1");
+					$(this).css("border-color","#a2b7c1");
+					$('.' + initial_id).html(text_remaining + ' characters left');
+				}
+			});
+		}
+	</script>
+
+</body>
+</html>
