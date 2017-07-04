@@ -10,6 +10,8 @@ It inserts the value of the maxLength inside the span tag;
 
 Onkeyup it counts the value of the input and subtracts from the maxlength
 
+If the maxLength limit is reached, it displays an error message and changes the color to red
+
 ## Notes:
 All fields must have a "characterCount" class. It can be a input, textarea...
 
